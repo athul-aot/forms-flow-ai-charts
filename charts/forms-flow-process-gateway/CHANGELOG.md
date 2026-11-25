@@ -18,3 +18,8 @@
   gateway ships with formsflow.ai EE 8.3.0 and later).
   nginx sidecar pinned to nginxinc/nginx-unprivileged:1.27-alpine with
   pullPolicy IfNotPresent (was latest / Always).
+
+### Fixed
+  KEYCLOAK_URL now includes the Keycloak context path (/auth). The gateway
+  builds its service-account token URL as ${KEYCLOAK_URL}/realms/..., which
+  returned 404 without it.

@@ -87,20 +87,25 @@ spec:
           {{- end }}
           env:
           # Keycloak / token checks
-          - name: KEYCLOAK_URL
+          # The gateway's engine config builds the service-account token URL as
+          # ${KEYCLOAK_URL}/realms/..., so KEYCLOAK_URL must include the context
+          # path (/auth). forms-flow-ai's KEYCLOAK_URL is the host only.
+          - name: KEYCLOAK_HOST_URL
             valueFrom:
               configMapKeyRef:
                 key: KEYCLOAK_URL
-                name: "{{ .Values.formsflow.configmap }}"
-          - name: KEYCLOAK_URL_REALM
-            valueFrom:
-              configMapKeyRef:
-                key: KEYCLOAK_URL_REALM
                 name: "{{ .Values.formsflow.configmap }}"
           - name: KEYCLOAK_URL_HTTP_RELATIVE_PATH
             valueFrom:
               configMapKeyRef:
                 key: KEYCLOAK_URL_HTTP_RELATIVE_PATH
+                name: "{{ .Values.formsflow.configmap }}"
+          - name: KEYCLOAK_URL
+            value: "$(KEYCLOAK_HOST_URL)$(KEYCLOAK_URL_HTTP_RELATIVE_PATH)"
+          - name: KEYCLOAK_URL_REALM
+            valueFrom:
+              configMapKeyRef:
+                key: KEYCLOAK_URL_REALM
                 name: "{{ .Values.formsflow.configmap }}"
           - name: JWT_OIDC_JWKS_URI
             valueFrom:
