@@ -29,7 +29,10 @@ commonAnnotations: {}
 image:
   registry: docker.io
   repository: formsflow/forms-flow-objectstore-ee
-  tag: v7.3.1
+  ## Offline forms are not in an EE release yet, and EE CI does not publish this
+  ## image (forms-flow-objectstore has a CI workflow only). Build it from
+  ## forms-flow-ai-ee/forms-flow-objectstore (develop) and push it with this tag.
+  tag: v8.4.0-alpha
   pullPolicy: IfNotPresent
   ## the -ee images are private
   pullSecrets:

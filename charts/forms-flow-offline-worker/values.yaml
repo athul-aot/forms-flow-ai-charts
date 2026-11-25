@@ -25,7 +25,9 @@ commonAnnotations: {}
 image:
   registry: docker.io
   repository: formsflow/forms-flow-offline-worker-ee
-  tag: v7.3.1
+  ## Offline forms are not in an EE release yet. EE develop publishes this image
+  ## as v8.4.0-alpha; pin the release tag once offline forms ship.
+  tag: v8.4.0-alpha
   pullPolicy: IfNotPresent
   ## the -ee images are private
   pullSecrets:
