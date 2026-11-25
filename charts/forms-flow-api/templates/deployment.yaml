@@ -343,7 +343,7 @@ spec:
                 key: OFFLINE_CUSTOM_SUBMISSION_ENABLED
                 name: "{{ .Values.formsflow.configmap }}"
           {{- if .Values.extraEnvVars }}
-          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 8 }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 10 }}
           {{- end }}
           {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
           envFrom:
@@ -369,7 +369,7 @@ spec:
           - name: api-logs
             mountPath: /forms-flow-api/app/logs
             {{- if .Values.extraVolumeMounts }}
-            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 10 }}
             {{- end }}
             {{- if .Values.sidecars }}
             {{- include "common.tplvalues.render" ( dict "value" .Values.sidecars "context" $) | nindent 8 }}

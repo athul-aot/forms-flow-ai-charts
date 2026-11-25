@@ -171,7 +171,7 @@ spec:
                 key: KEYCLOAK_URL_HTTP_RELATIVE_PATH
                 name: "{{ .Values.formsflow.configmap }}"
           {{- if .Values.extraEnvVars }}
-          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 8 }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 10 }}
           {{- end }}
           {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
           envFrom:
@@ -220,6 +220,6 @@ spec:
         configMap:
           name: forms-flow-data-layer-nginx-config      
         {{- if .Values.extraVolumes }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 6 }}
         {{- end }}
       restartPolicy: Always

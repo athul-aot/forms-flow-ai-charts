@@ -419,7 +419,7 @@ spec:
           mountPath: /app/mail-config.properties
           subPath: mail-config.properties      
           {{- if .Values.extraVolumeMounts }}
-          {{- include "common.tplvalues.render" ( dict "value" .Values.extraVolumeMounts "context" $ ) | nindent 12 }}
+          {{- include "common.tplvalues.render" ( dict "value" .Values.extraVolumeMounts "context" $ ) | nindent 8 }}
           {{- end }}
         {{- if .Values.sidecars }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.sidecars "context" $) | nindent 6 }}

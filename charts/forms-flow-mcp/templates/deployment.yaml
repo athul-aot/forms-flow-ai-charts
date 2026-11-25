@@ -210,7 +210,7 @@ spec:
                 key: MCP_SERVER_PORT
                 name: "{{ .Chart.Name }}"                 
           {{- if .Values.extraEnvVars }}
-          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 8 }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 10 }}
           {{- end }}
           {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
           envFrom:
@@ -239,7 +239,8 @@ spec:
             {{- if .Values.sidecars }}
             {{- include "common.tplvalues.render" ( dict "value" .Values.sidecars "context" $) | nindent 8 }}
             {{- end }}
-        {{- if .Values.extraVolumes }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 6 }}
-        {{- end }}
+      {{- if .Values.extraVolumes }}
+      volumes:
+      {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 6 }}
+      {{- end }}
       restartPolicy: Always

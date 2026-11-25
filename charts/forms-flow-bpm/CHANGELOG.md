@@ -14,6 +14,10 @@
   DATA_ANALYSIS_URL. It read forms-flow-ai's DATA_ANALYSIS_SERVICE_URL,
   removed with forms-flow-data-analysis, so the pod could not start.
 
+### Fixed
+  extraVolumeMounts was rendered at the wrong indentation and did not parse;
+  it now renders in the main container's volumeMounts.
+
 ## 8.4.0 (2026-04-14)
 ### Changed
   Updated Intentation in deployment yaml
