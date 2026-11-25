@@ -58,11 +58,11 @@ copies share the check that each token is used only once.
 | Name                          | Description                                                                 | Value                                      |
 |-------------------------------|-----------------------------------------------------------------------------|--------------------------------------------|
 | `image.repository`            | Gateway image                                                               | `formsflow/forms-flow-process-gateway-ee`  |
-| `image.tag`                   | Image tag                                                                   | `v7.3.1`                                   |
+| `image.tag`                   | Image tag                                                                   | `v8.3.1`                                   |
 | `image.pullSecrets`           | Pull secrets (the -ee image is private)                                     | `[forms-flow-ai-auth]`                     |
 | `formsflow.configmap`         | forms-flow-ai ConfigMap name                                                | `forms-flow-ai`                            |
 | `formsflow.secret`            | forms-flow-ai Secret name                                                   | `forms-flow-ai`                            |
-| `camundaBaseUrlKey`           | forms-flow-ai key for `CAMUNDA_BASE_URL` (`BPM_API_URL` or `BPM_API_SERVICE_URL`) | `BPM_API_URL`                        |
+| `camundaBaseUrlKey`           | forms-flow-ai key for `CAMUNDA_BASE_URL` (`BPM_API_URL` or `BPM_API_SERVICE_URL`) | `BPM_API_SERVICE_URL`                |
 | `configuration.fastapiEnv`    | `FASTAPI_ENV`                                                               | `production`                               |
 | `configuration.workers`       | `FORMSFLOW_PROCESS_GATEWAY_WORKERS` (uvicorn workers)                       | `1`                                        |
 | `configuration.forwardedAllowIps` | `FORWARDED_ALLOW_IPS`                                                   | `*`                                        |

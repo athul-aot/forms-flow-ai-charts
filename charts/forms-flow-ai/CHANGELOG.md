@@ -71,6 +71,13 @@
   (its values were gone, so the chart did not render without --set) and no
   chart read it.
 
+### Added (process gateway switch)
+  forms-flow-process-gateway.enabled (default true). Set it to false when the
+  gateway is not installed (images older than EE 8.3.0): PROCESS_GATEWAY_URL,
+  PROCESS_GATEWAY_SERVICE_URL and BPM_API_URL_PREFIX then point straight at
+  Camunda (https://<web host>/camunda, http://forms-flow-bpm:8080/camunda and
+  forms-flow-process-gateway.directApiPrefix, default /engine-rest-ext/v1).
+
 ## 8.4.0 (2025-04-14)
 ### Added
   Support for custom environment variables in configmap template.

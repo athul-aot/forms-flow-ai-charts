@@ -33,11 +33,20 @@ forms-flow-analytics:
     name: forms-flow-analytics
     port: "5000"
 forms-flow-process-gateway:
+  # true: the API, admin, web app and offline worker call the process engine
+  # through chart forms-flow-process-gateway (formsflow.ai EE 8.3.0 and later).
+  # false: they call Camunda directly, as before the gateway (no gateway
+  # installed, or images older than EE 8.3.0). The three ConfigMap keys below
+  # then point at Camunda, with prefix directApiPrefix (the path the API used
+  # before the gateway). EE 8.3+ images with the gateway off are untested.
+  enabled: true
   # The web app calls it at https://<forms-flow-web host><path>; the API,
   # admin and offline worker at the service below.
   path: /gatewayapi
   # Path prefix of the gateway's process API (BPM_API_URL_PREFIX).
   apiPrefix: /api/v1
+  # Camunda's own REST prefix, used when enabled is false.
+  directApiPrefix: /engine-rest-ext/v1
   service:
     name: forms-flow-process-gateway
     port: "8000"

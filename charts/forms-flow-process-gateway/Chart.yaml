@@ -4,7 +4,7 @@ description: forms-flow-process-gateway sits between formsflow.ai and the proces
 icon: "https://raw.githubusercontent.com/AOT-Technologies/forms-flow-ai/develop/.images/logo.png"
 version: 8.5.0
 type: application
-appVersion: "v7.3.1"
+appVersion: "v8.3.1"
 dependencies:
 - name: common
   repository: https://charts.bitnami.com/bitnami

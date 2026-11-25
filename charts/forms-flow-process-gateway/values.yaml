@@ -14,7 +14,8 @@ image:
   registry: docker.io
   repository: formsflow/forms-flow-process-gateway-ee
   pullPolicy: Always
-  tag: "v7.3.1"
+  ## EE image. The gateway ships with formsflow.ai EE 8.3.0 and later.
+  tag: "v8.3.1"
   ## the -ee image is private
   pullSecrets:
     - forms-flow-ai-auth
@@ -34,8 +35,9 @@ formsflow:
 
 ## @param camundaBaseUrlKey forms-flow-ai ConfigMap key for CAMUNDA_BASE_URL:
 ## BPM_API_URL (public, https://<web host>/camunda) or BPM_API_SERVICE_URL
-## (in the cluster, http://forms-flow-bpm:8080/camunda)
-camundaBaseUrlKey: BPM_API_URL
+## (in the cluster, http://forms-flow-bpm:8080/camunda). The in-cluster address is the
+## default: the gateway then reaches Camunda without going out through the ingress.
+camundaBaseUrlKey: BPM_API_SERVICE_URL
 
 ## Settings of the gateway itself (this chart's ConfigMap).
 configuration:
@@ -152,8 +154,8 @@ ExtraContainer:
   image:
     registry: docker.io
     repository: nginxinc/nginx-unprivileged
-    pullPolicy: Always
-    tag: "latest"
+    pullPolicy: IfNotPresent
+    tag: "1.27-alpine"
   resources: {}
 
 updateStrategy:

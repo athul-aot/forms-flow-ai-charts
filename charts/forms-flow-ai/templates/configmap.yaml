@@ -16,9 +16,17 @@ data:
     BPM_API_SERVICE_URL: http://{{ tpl (index .Values "forms-flow-bpm" "service" "name") . }}:{{ tpl (index .Values "forms-flow-bpm" "service" "port") . }}/camunda
     # forms-flow-process-gateway: the API, admin, web app and offline worker call
     # the process engine through it (BPM_API_URL stays the Camunda address).
-    PROCESS_GATEWAY_URL: https://{{ tpl (index .Values "forms-flow-web" "ingress" "hostname") . }}{{ index .Values "forms-flow-process-gateway" "path" }}
-    PROCESS_GATEWAY_SERVICE_URL: http://{{ tpl (index .Values "forms-flow-process-gateway" "service" "name") . }}:{{ tpl (index .Values "forms-flow-process-gateway" "service" "port") . }}
-    BPM_API_URL_PREFIX: {{ index .Values "forms-flow-process-gateway" "apiPrefix" | quote }}
+    {{- $gateway := index .Values "forms-flow-process-gateway" }}
+    {{- if $gateway.enabled }}
+    PROCESS_GATEWAY_URL: https://{{ tpl (index .Values "forms-flow-web" "ingress" "hostname") . }}{{ $gateway.path }}
+    PROCESS_GATEWAY_SERVICE_URL: http://{{ tpl $gateway.service.name . }}:{{ tpl $gateway.service.port . }}
+    BPM_API_URL_PREFIX: {{ $gateway.apiPrefix | quote }}
+    {{- else }}
+    # Gateway disabled: same keys, pointing straight at Camunda.
+    PROCESS_GATEWAY_URL: https://{{ tpl (index .Values "forms-flow-web" "ingress" "hostname") . }}/camunda
+    PROCESS_GATEWAY_SERVICE_URL: http://{{ tpl (index .Values "forms-flow-bpm" "service" "name") . }}:{{ tpl (index .Values "forms-flow-bpm" "service" "port") . }}/camunda
+    BPM_API_URL_PREFIX: {{ $gateway.directApiPrefix | default "/engine-rest-ext/v1" | quote }}
+    {{- end }}
     KEYCLOAK_JWT_OIDC_ALGORITHMS: "RS256"
     KEYCLOAK_JWT_OIDC_CACHING_ENABLED: "True"
     KEYCLOAK_JWT_OIDC_JWKS_CACHE_TIMEOUT: "300"
